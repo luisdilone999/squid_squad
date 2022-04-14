@@ -23,7 +23,18 @@ public class WheelSteer : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        Vector2 movementDirection = new Vector2(horizontalInput, verticalInput);
+        if (horizontalInput == 1) {
+            rotationSpeed += 1;
+
+        }
+        if (horizontalInput == -1) {
+            rotationSpeed -= 1;
+        } 
+
+        transform.eulerAngles += Vector3.forward * (-rotationSpeed) * Time.deltaTime;
+
+
+        /*Vector2 movementDirection = new Vector2(horizontalInput, verticalInput);
         float inputMagnitude = Mathf.Clamp01(movementDirection.magnitude);
         movementDirection.Normalize();
 
@@ -34,5 +45,7 @@ public class WheelSteer : MonoBehaviour
         	Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, movementDirection);
         	transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
+    */    
+
     }
 }
