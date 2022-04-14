@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BlockSpawner : MonoBehaviour
 {
@@ -9,10 +10,17 @@ public class BlockSpawner : MonoBehaviour
     public float timeSpawn = 2f;
     public float timeWaves = 1.5f;
 
+    public int score = -1;
+    public Text scoreText;
+
     void Update() {
         if (Time.time >= timeSpawn) {
             Spawner();
             timeSpawn = Time.time + timeWaves;
+
+            score += 1;
+            
+            scoreText.text = score.ToString();
         }
     }
 
