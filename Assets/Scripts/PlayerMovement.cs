@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 15f;
-    public float screenwidth = 5f;
+    public float screenwidth = 5.5f;
     public float slowness = 10f;
+    public float laneLength = 2.2f;
     public GameObject theSpawner;
     public Text scoreText;
 
@@ -19,11 +20,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update() {
-        float x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
+        Vector2 newPosition = transform.position;
+        if(Input.GetKeyDown(KeyCode.A)){
+            newPosition.x -= laneLength;
+        }
+        if(Input.GetKeyDown(KeyCode.D)){
+            newPosition.x += laneLength;
+        }
 
-        Vector2 newPosition = rb.position + Vector2.right * x;
-        newPosition.x = Mathf.Clamp(newPosition.x, -screenwidth, screenwidth);
-
+        newPosition.x = Mathf.Max(Mathf.Min(newPosition.x, 4.4f), -4.4f);
         rb.MovePosition(newPosition);
     }
 
