@@ -22,10 +22,10 @@ public class PlayerMovement : MonoBehaviour
     void Update() {
         Vector2 newPosition = transform.position;
 
-        if(Input.GetKeyDown(KeyCode.A)){
+        if(Input.GetKeyDown(KeyCode.Comma)){
             newPosition.x -= laneLength;
         }
-        if(Input.GetKeyDown(KeyCode.D)){
+        if(Input.GetKeyDown(KeyCode.Slash)){
             newPosition.x += laneLength;
         }
 
