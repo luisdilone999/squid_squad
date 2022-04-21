@@ -10,6 +10,8 @@ public class WheelSteer : MonoBehaviour
 	[SerializeField]
 	private float rotationSpeed;
 
+    public float inertia = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,32 +22,17 @@ public class WheelSteer : MonoBehaviour
     void Update()
     {
         
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
 
-        if (horizontalInput == 1) {
+        if (Input.GetKey(KeyCode.X)) {
             rotationSpeed += 1;
 
         }
-        if (horizontalInput == -1) {
+        if (Input.GetKey(KeyCode.Z)) {
             rotationSpeed -= 1;
         } 
 
-        transform.eulerAngles += Vector3.forward * (-rotationSpeed) * Time.deltaTime;
+        transform.eulerAngles += Vector3.forward * (-rotationSpeed * inertia) * Time.deltaTime;
 
-
-        /*Vector2 movementDirection = new Vector2(horizontalInput, verticalInput);
-        float inputMagnitude = Mathf.Clamp01(movementDirection.magnitude);
-        movementDirection.Normalize();
-
-        transform.Translate(movementDirection * speed * inputMagnitude * Time.deltaTime, Space.World);
-
-        if (movementDirection != Vector2.zero){
-
-        	Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, movementDirection);
-        	transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-        }
-    */    
 
     }
 }

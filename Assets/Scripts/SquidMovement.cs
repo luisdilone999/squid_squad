@@ -14,6 +14,6 @@ public class SquidMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += new Vector3(0, 1, 0) * Time.deltaTime * MovementSpeed;
+        transform.position += transform.up * Time.deltaTime * MovementSpeed;
     }
 }
