@@ -12,6 +12,8 @@ public class WheelSteer : MonoBehaviour
 
     public float inertia = 1;
 
+    public int rotateDir = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +33,7 @@ public class WheelSteer : MonoBehaviour
             rotationSpeed -= 1;
         } 
 
-        transform.eulerAngles += Vector3.forward * (-rotationSpeed * inertia) * Time.deltaTime;
+        transform.eulerAngles += rotateDir * Vector3.forward * (-rotationSpeed * inertia) * Time.deltaTime;
 
 
     }
