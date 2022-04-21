@@ -10,7 +10,7 @@ public class Destroyer : MonoBehaviour
     }
 
     void Update() {
-        if (transform.position.y < -0.5) {
+        if (transform.position.y < -2) {
             Destroy(gameObject);
         }
     }

@@ -28,6 +28,8 @@ public class ArmGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         distance =  cursor.position.x - this.transform.position.x;
         if(Input.GetKeyDown(key1)){
             float speed = cursor_vel.velocity.x;
@@ -35,7 +37,7 @@ public class ArmGame : MonoBehaviour
                 if (Mathf.Abs(speed * 1.1f) <16f){
                     ChangeSpeed(1.1f);
                 }
-                score += 1;
+                score += 1; 
             }else{
                 if(Mathf.Abs(speed * 0.6f) > 0.1f){
                     ChangeSpeed(0.6f); 
@@ -45,6 +47,7 @@ public class ArmGame : MonoBehaviour
             Debug.Log(score);
         }
     }
+
     public void ChangeSpeed(float dv){
         float vx = cursor_vel.velocity.x;
         cursor_vel.velocity = new Vector2(vx * dv ,0);
@@ -54,4 +57,5 @@ public class ArmGame : MonoBehaviour
         dir *= -1;
         cursor_vel.velocity = new Vector2(speed*-1,0);
     }
-}
+     
+    }

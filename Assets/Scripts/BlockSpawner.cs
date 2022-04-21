@@ -15,6 +15,7 @@ public class BlockSpawner : MonoBehaviour
     public Text scoreText;
     public Text itemText;
 
+    
     void Update() {
         if(Input.GetKeyDown(KeyCode.Period)) { 
             items -= 1;

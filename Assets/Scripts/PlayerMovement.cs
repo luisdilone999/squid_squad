@@ -7,9 +7,10 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 15f;
-    public float screenwidth = 5.5f;
+    public float screenwidth = 2f;
+    public float centerscreen = 2.5f;
     public float slowness = 10f;
-    public float laneLength = 2.2f;
+    public float laneLength = .2f;
     public GameObject theSpawner;
     public Text scoreText;
 
@@ -29,14 +30,16 @@ public class PlayerMovement : MonoBehaviour
             newPosition.x += laneLength;
         }
 
-        newPosition.x = Mathf.Max(Mathf.Min(newPosition.x, 4.4f), -4.4f);
+        newPosition.x = Mathf.Max(Mathf.Min(newPosition.x, centerscreen + screenwidth), centerscreen - screenwidth);
 
         transform.position = newPosition;
         // rb.MovePosition(newPosition);
     }
 
     void OnCollisionEnter2D() {
-        StartCoroutine(RestartLevel());
+        scoreText.text = "0";
+        BlockSpawner spawner = theSpawner.GetComponent<BlockSpawner>();
+        spawner.score = -1;
     }
 
     IEnumerator RestartLevel() {
