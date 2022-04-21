@@ -12,14 +12,14 @@ public class BlockSpawner : MonoBehaviour
 
     public int score = -1;
     public int items = 0;
-    public Text scoreText;
-    public Text itemText;
+    // public Text scoreText;
+    // public Text itemText;
 
     
     void Update() {
         if(Input.GetKeyDown(KeyCode.Period)) { 
             items -= 1;
-            itemText.text = "Ink sacs: " + items.ToString();
+            // itemText.text = "Ink sacs: " + items.ToString();
         }
 
         if (Time.time >= timeSpawn) {
@@ -33,10 +33,10 @@ public class BlockSpawner : MonoBehaviour
 
             if (score % 20 == 0 && score != 0) {
                 items += 1;
-                itemText.text = "Ink sacs: " + items.ToString();
+                // itemText.text = "Ink sacs: " + items.ToString();
             }
             
-            scoreText.text = score.ToString();
+            // scoreText.text = score.ToString();
         }
     }
 

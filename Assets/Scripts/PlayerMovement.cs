@@ -12,7 +12,8 @@ public class PlayerMovement : MonoBehaviour
     public float slowness = 10f;
     public float laneLength = .2f;
     public GameObject theSpawner;
-    public Text scoreText;
+    public GameObject thePlayer;
+    // public Text scoreText;
 
     private Rigidbody2D rb;
 
@@ -36,10 +37,18 @@ public class PlayerMovement : MonoBehaviour
         // rb.MovePosition(newPosition);
     }
 
-    void OnCollisionEnter2D() {
-        scoreText.text = "0";
+    IEnumerator OnCollisionEnter2D(Collision2D collision) {
+        // scoreText.text = "0";
         BlockSpawner spawner = theSpawner.GetComponent<BlockSpawner>();
         spawner.score = -1;
+
+        var cubeRenderer = thePlayer.GetComponent<Renderer>();
+
+        cubeRenderer.material.SetColor("_Color", Color.red);
+        yield return new WaitForSeconds(0.5f);
+        cubeRenderer.material.SetColor("_Color", Color.white);
+
+        Destroy(collision.gameObject);
     }
 
     IEnumerator RestartLevel() {
@@ -51,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         Time.timeScale = 1f;
         Time.fixedDeltaTime = Time.fixedDeltaTime*slowness;
 
-        scoreText.text = "0";
+        // scoreText.text = "0";
         BlockSpawner spawner = theSpawner.GetComponent<BlockSpawner>();
         spawner.score = -1;
 
