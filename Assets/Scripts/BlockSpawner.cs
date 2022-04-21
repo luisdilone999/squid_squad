@@ -11,9 +11,16 @@ public class BlockSpawner : MonoBehaviour
     public float timeWaves = 2f;
 
     public int score = -1;
+    public int items = 0;
     public Text scoreText;
+    public Text itemText;
 
     void Update() {
+        if(Input.GetKeyDown(KeyCode.Period)) { 
+            items -= 1;
+            itemText.text = "Ink sacs: " + items.ToString();
+        }
+
         if (Time.time >= timeSpawn) {
             Spawner();
             timeSpawn = Time.time + timeWaves;
@@ -22,6 +29,11 @@ public class BlockSpawner : MonoBehaviour
             timeWaves = Mathf.Max(0.5f, timeWaves);
 
             score += 1;
+
+            if (score % 20 == 0 && score != 0) {
+                items += 1;
+                itemText.text = "Ink sacs: " + items.ToString();
+            }
             
             scoreText.text = score.ToString();
         }

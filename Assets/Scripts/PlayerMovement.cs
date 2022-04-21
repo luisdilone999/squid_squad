@@ -21,15 +21,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Update() {
         Vector2 newPosition = transform.position;
-        if(Input.GetKeyDown(KeyCode.A)){
+
+        if(Input.GetKeyDown(KeyCode.Comma)){
             newPosition.x -= laneLength;
         }
-        if(Input.GetKeyDown(KeyCode.D)){
+        if(Input.GetKeyDown(KeyCode.Slash)){
             newPosition.x += laneLength;
         }
 
         newPosition.x = Mathf.Max(Mathf.Min(newPosition.x, 4.4f), -4.4f);
-        rb.MovePosition(newPosition);
+
+        transform.position = newPosition;
+        // rb.MovePosition(newPosition);
     }
 
     void OnCollisionEnter2D() {
