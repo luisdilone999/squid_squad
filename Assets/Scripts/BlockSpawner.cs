@@ -7,19 +7,20 @@ public class BlockSpawner : MonoBehaviour
 {
     public Transform[] spawnPoints;
     public GameObject blockPrefab;
+    public GameObject itemPrefab;
     public float timeSpawn = 2f;
     public float timeWaves = 2f;
 
+    public int itemWave = 3;
     public int score = -1;
     public int items = 0;
-    // public Text scoreText;
-    // public Text itemText;
+    public Text itemText;
 
     
     void Update() {
-        if(Input.GetKeyDown(KeyCode.Period)) { 
+        if(Input.GetKeyDown(KeyCode.Period) && items != 0) { 
             items -= 1;
-            // itemText.text = "Ink sacs: " + items.ToString();
+            itemText.text = "Ink sacs: " + items.ToString();
         }
 
         if (Time.time >= timeSpawn) {
@@ -30,13 +31,6 @@ public class BlockSpawner : MonoBehaviour
             timeWaves = Mathf.Max(0.5f, timeWaves);
 
             score += 1;
-
-            if (score % 20 == 0 && score != 0) {
-                items += 1;
-                // itemText.text = "Ink sacs: " + items.ToString();
-            }
-            
-            // scoreText.text = score.ToString();
         }
     }
 
@@ -65,6 +59,15 @@ public class BlockSpawner : MonoBehaviour
         for(int i = 0; i < spawnPoints.Length; i++) {
             if(randomNumber1 != i && randomNumber2 != i) {
                 Instantiate(blockPrefab, spawnPoints[i].position, Quaternion.identity);
+            }
+
+            else if(score % itemWave == 0 && score != 0) {
+                if(Random.value<0.5f) {
+                    Instantiate(itemPrefab, spawnPoints[randomNumber1].position, Quaternion.identity);
+                }
+                else {
+                    Instantiate(itemPrefab, spawnPoints[randomNumber2].position, Quaternion.identity);
+                }
             }
         }
     }
