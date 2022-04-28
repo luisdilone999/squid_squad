@@ -16,7 +16,7 @@ public class RadarPulse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if (Input.GetButtonDown("Fire1"))
+       if (Input.GetKeyDown(KeyCode.Q))
         {
             radarActive = true;
         }
@@ -49,7 +49,7 @@ public class RadarPulse : MonoBehaviour
                 {
                     alreadyPingedColliderList.Add(raycastHit2D.collider);
                     Instantiate(pfRadarPing, raycastHit2D.point, Quaternion.identity);
-                    Debug.Log("Ping!");
+                    // Debug.Log("Ping!");
                 }
             }
         }

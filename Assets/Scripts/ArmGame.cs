@@ -6,7 +6,7 @@ public class ArmGame : MonoBehaviour
 {
     public Vector3 center;
     public Transform cursor;
-    public KeyCode key1 = KeyCode.Q;
+    public KeyCode key1 = KeyCode.P;
     public KeyCode key2 = KeyCode.W;
     public KeyCode key3 = KeyCode.E;
 
@@ -44,7 +44,7 @@ public class ArmGame : MonoBehaviour
                     score -= 1;
                 }
             }
-            Debug.Log(score);
+            // Debug.Log(score);
         }
     }
 

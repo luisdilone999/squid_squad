@@ -6,13 +6,14 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 15f;
-    public float screenwidth = 2f;
-    public float centerscreen = 2.5f;
-    public float slowness = 10f;
-    public float laneLength = .2f;
+    public float speed;
+    public float screenwidth;
+    public float centerscreen;
+    public float slowness;
+    public float laneLength;
     public GameObject theSpawner;
-    public Text scoreText;
+    public GameObject thePlayer;
+    // public Text scoreText;
 
     private Rigidbody2D rb;
 
@@ -36,12 +37,34 @@ public class PlayerMovement : MonoBehaviour
         // rb.MovePosition(newPosition);
     }
 
-    void OnCollisionEnter2D() {
-        scoreText.text = "0";
+    IEnumerator OnCollisionEnter2D(Collision2D collision) {
+        // scoreText.text = "0";
         BlockSpawner spawner = theSpawner.GetComponent<BlockSpawner>();
-        spawner.score = -1;
+        var cubeRenderer = thePlayer.GetComponent<Renderer>();
+
+        if (collision.gameObject.tag == "ink") {
+            spawner.items += 1;
+
+            cubeRenderer.material.SetColor("_Color", Color.blue);
+            yield return new WaitForSeconds(0.05f);
+            cubeRenderer.material.SetColor("_Color", Color.white);
+        }
+
+        else {
+            spawner.score = -1;
+            spawner.items -= 1;
+            spawner.timeWaves = 2f;
+
+
+            cubeRenderer.material.SetColor("_Color", Color.red);
+            yield return new WaitForSeconds(0.5f);
+            cubeRenderer.material.SetColor("_Color", Color.white);
+        }
+
+        Destroy(collision.gameObject);
     }
 
+/*
     IEnumerator RestartLevel() {
         Time.timeScale = 1f/slowness;
         Time.fixedDeltaTime = Time.fixedDeltaTime/slowness;
@@ -51,10 +74,11 @@ public class PlayerMovement : MonoBehaviour
         Time.timeScale = 1f;
         Time.fixedDeltaTime = Time.fixedDeltaTime*slowness;
 
-        scoreText.text = "0";
         BlockSpawner spawner = theSpawner.GetComponent<BlockSpawner>();
         spawner.score = -1;
+        spawner.items -= 1;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+*/
 }
