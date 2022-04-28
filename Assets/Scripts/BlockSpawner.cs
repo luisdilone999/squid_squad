@@ -56,13 +56,14 @@ public class BlockSpawner : MonoBehaviour
             }
         }
 
+        float flip = Random.value;
         for(int i = 0; i < spawnPoints.Length; i++) {
             if(randomNumber1 != i && randomNumber2 != i) {
                 Instantiate(blockPrefab, spawnPoints[i].position, Quaternion.identity);
             }
 
             else if(score % itemWave == 0 && score != 0) {
-                if(Random.value<0.5f) {
+                if(flip<0.5f) {
                     Instantiate(itemPrefab, spawnPoints[randomNumber1].position, Quaternion.identity);
                 }
                 else {

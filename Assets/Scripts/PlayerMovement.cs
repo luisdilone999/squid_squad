@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
             spawner.items += 1;
 
             cubeRenderer.material.SetColor("_Color", Color.blue);
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.15f);
             cubeRenderer.material.SetColor("_Color", Color.white);
         }
 
