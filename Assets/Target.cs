@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cursor : MonoBehaviour
+public class Target : MonoBehaviour
 {
     public ArmGame armGame;
     // Start is called before the first frame update
@@ -16,8 +16,7 @@ public class Cursor : MonoBehaviour
     {
         
     }
-
     void OnTriggerEnter2D(Collider2D other){
-        armGame.ChangeCurDir();
+        armGame.ChangeTarDir();
     }
 }
