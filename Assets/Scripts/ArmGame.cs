@@ -6,6 +6,7 @@ public class ArmGame : MonoBehaviour
 {
     public Vector3 center;
     public Transform cursor;
+    public Transform target;
     public KeyCode key1 = KeyCode.P;
     public KeyCode key2 = KeyCode.W;
     public KeyCode key3 = KeyCode.E;
@@ -13,6 +14,7 @@ public class ArmGame : MonoBehaviour
     public float distance = 0;
     public int score = 0;
     private Rigidbody2D cursor_vel;
+    private Rigidbody2D target_vel;
     private int dir = 1;
     
 
@@ -21,7 +23,9 @@ public class ArmGame : MonoBehaviour
     {
         center = this.transform.position;
         cursor = this.transform.Find("Cursor");
+        target = this.transform.Find("Target");
         cursor_vel = cursor.gameObject.GetComponent<Rigidbody2D>();
+        target_vel = target.gameObject.GetComponent<Rigidbody2D>();
         cursor_vel.velocity = new Vector2(1f,0);
     }
 
@@ -30,7 +34,7 @@ public class ArmGame : MonoBehaviour
     {
 
 
-        distance =  cursor.position.x - this.transform.position.x;
+        distance =  cursor.position.x - target.position.x;
         if(Input.GetKeyDown(key1)){
             float speed = cursor_vel.velocity.x;
             if (Mathf.Abs(distance) < 1f){
@@ -52,7 +56,13 @@ public class ArmGame : MonoBehaviour
         float vx = cursor_vel.velocity.x;
         cursor_vel.velocity = new Vector2(vx * dv ,0);
     }
-    public void ChangeDir(){
+    public void ChangeCurDir(){
+        float speed = cursor_vel.velocity.x;
+        dir *= -1;
+        cursor_vel.velocity = new Vector2(speed*-1,0);
+    }
+
+    public void ChangeTarDir(){
         float speed = cursor_vel.velocity.x;
         dir *= -1;
         cursor_vel.velocity = new Vector2(speed*-1,0);
